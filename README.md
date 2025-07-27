@@ -1,71 +1,41 @@
-# Lazy README
+# LazyCf
 
-This is the README for your extension "Lazy". After writing up a brief description, we recommend including the following sections.
+**LazyCf** is a VS Code extension to interact with [Codeforces](https://codeforces.com):
 
-## Features
+- Browse & search contests and problems.
+- View problem statements in Markdown.
+- Auto-create source files with problem info and sample testcases.
+- Run your code on sample inputs locally for C++, Python, and Java.
+- Submit directly to Codeforces and track verdicts.
+- Securely store your Codeforces API Key & Secret.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Installation
 
-For example if there is an image subfolder under your extension project workspace:
+1. Clone/download this repo.
+2. `npm install`
+3. `npm run build`
+4. In VS Code, select "Run Extension".
 
-\!\[feature X\]\(images/feature-x.png\)
+## Usage
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- **Authenticate**: Run `LazyCf: Authenticate` and input your Codeforces API Key & Secret (see [here](https://codeforces.com/settings/api)).
+- **Browse Contests**: `LazyCf: Browse Contests`
+- **Fetch Problem**: `LazyCf: Fetch Problem` (by ID, tag, or rating)
+- **Run Sample Tests**: `LazyCf: Run Sample Tests` (on open file)
+- **Submit Solution**: `LazyCf: Submit Solution` (on open file)
 
-## Requirements
+## Notes
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Sample inputs/outputs are placeholders (API does not provide them). Use your own or see [cf-downloader](https://github.com/xalanq/cf-tool) for scraping samples.
+- Supported languages: C++, Python, Java.
+- Uses system compilers (`g++`, `python3`, `javac`, etc.) in PATH.
 
-## Extension Settings
+## Security
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+- Your API key/secret is stored securely using VS Code's global state.
 
-For example:
+## Roadmap
 
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- [ ] Auto-scrape sample testcases.
+- [ ] More language support.
+- [ ] Contest reminders/notifications.

@@ -1,8 +1,9 @@
 {
-  "name": "Lazy",
+  "name": "lazy-cf",
   "displayName": "LazyCF",
   "description": "LazyCf is a powerful VS Code extension that brings Codeforces directly to your coding environment. No more switching tabs or waiting—practice, test, and submit competitive programming problems right from your editor.",
   "version": "0.0.1",
+  "publisher": "your-publisher-name",
   "engines": {
     "vscode": "^1.102.0"
   },
@@ -14,15 +15,129 @@
   "contributes": {
     "commands": [
       {
+        "command": "lazycf.login",
+        "title": "Login to Codeforces",
+        "category": "LazyCF"
+      },
+      {
+        "command": "lazycf.logout",
+        "title": "Logout from Codeforces",
+        "category": "LazyCF"
+      },
+      {
+        "command": "lazycf.checkLogin",
+        "title": "Check Login Status",
+        "category": "LazyCF"
+      },
+      {
+        "command": "lazycf.fetchProblem",
+        "title": "Fetch Problem",
+        "category": "LazyCF"
+      },
+      {
+        "command": "lazycf.searchProblems",
+        "title": "Search Problems",
+        "category": "LazyCF"
+      },
+      {
+        "command": "lazycf.submitSolution",
+        "title": "Submit Solution",
+        "category": "LazyCF"
+      },
+      {
+        "command": "lazycf.viewSubmissions",
+        "title": "View Recent Submissions",
+        "category": "LazyCF"
+      },
+      {
+        "command": "lazycf.fetchContest",
+        "title": "Fetch Contest Problems",
+        "category": "LazyCF"
+      },
+      {
         "command": "Lazy.helloWorld",
-        "title": "Hello World"
+        "title": "Hello World",
+        "category": "LazyCF"
+      },
+      {
+        "command": "lazycf.logout",
+        "title": "Logout from Codeforces",
+        "category": "LazyCF"
+      },
+      {
+        "command": "lazycf.checkLogin",
+        "title": "Check Login Status",
+        "category": "LazyCF"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "lazycf.submitSolution",
+          "when": "resourceExtname == .cpp || resourceExtname == .py || resourceExtname == .java || resourceExtname == .c || resourceExtname == .js",
+          "group": "lazycf@1"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "lazycf.submitSolution",
+          "when": "resourceExtname == .cpp || resourceExtname == .py || resourceExtname == .java || resourceExtname == .c || resourceExtname == .js",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "lazycf.submitSolution",
+          "when": "resourceExtname == .cpp || resourceExtname == .py || resourceExtname == .java || resourceExtname == .c || resourceExtname == .js"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "LazyCF",
+      "properties": {
+        "lazycf.defaultLanguage": {
+          "type": "string",
+          "default": "cpp",
+          "description": "Default programming language",
+          "enum": [
+            "cpp",
+            "python",
+            "java"
+          ]
+        },
+        "lazycf.autoSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-save before submission"
+        },
+        "lazycf.templatePath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to custom code templates folder"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "lazycf.fetchProblem",
+        "key": "ctrl+shift+f",
+        "mac": "cmd+shift+f"
+      },
+      {
+        "command": "lazycf.submitSolution",
+        "key": "ctrl+shift+s",
+        "mac": "cmd+shift+s"
+      },
+      {
+        "command": "lazycf.searchProblems",
+        "key": "ctrl+shift+q",
+        "mac": "cmd+shift+q"
       }
     ]
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "npm run check-types && npm run lint && node esbuild.js",
-    "watch": "npm-run-all -p watch:*",
     "watch:esbuild": "node esbuild.js --watch",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "package": "npm run check-types && npm run lint && node esbuild.js --production",
@@ -31,19 +146,26 @@
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "build": "esbuild src/extension.ts --bundle --platform=node --outdir=dist --external:vscode --format=cjs",
+    "watch": "esbuild src/extension.ts --bundle --platform=node --outdir=dist --external:vscode --watch --format=cjs"
   },
   "devDependencies": {
-    "@types/vscode": "^1.102.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
+    "@types/vscode": "^1.102.0",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
-    "eslint": "^9.25.1",
-    "esbuild": "^0.25.3",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.8.3",
     "@vscode/test-cli": "^0.0.11",
-    "@vscode/test-electron": "^2.5.2"
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.25.3",
+    "eslint": "^9.25.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "cheerio": "^1.1.2",
+    "tough-cookie": "^5.1.2"
   }
 }
